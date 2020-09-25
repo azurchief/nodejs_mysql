@@ -6,21 +6,22 @@ var template = require('./lib/template.js');
 var path = require('path');
 var sanitizeHtml = require('sanitize-html');
 var mysql = require('mysql');
-mysql.createConnection({
+var db = mysql.createConnection({
   host:'localhost',
   user:'nodejs',
-  password:'11111111',
+  password:'111111',
   database:'opentutorials'
 });
 db.connect();
+
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
     if(pathname === '/'){
-      /* if(queryData.id === undefined){
-        fs.readdir('./data', function(error, filelist){
+      if(queryData.id === undefined){
+        /* fs.readdir('./data', function(error, filelist){
           var title = 'Welcome';
           var description = 'Hello, Node.js';
           var list = template.list(filelist);
@@ -34,9 +35,8 @@ var app = http.createServer(function(request,response){
         db.query(`SELECT * FROM topic`, function(error,topics){
           console.log(topics);
           response.writeHead(200);
-          response.end('success');
-
-        })
+          response.end('Success');
+        });
       } else {
         fs.readdir('./data', function(error, filelist){
           var filteredId = path.parse(queryData.id).base;
@@ -60,8 +60,8 @@ var app = http.createServer(function(request,response){
             response.end(html);
           });
         });
-      }    
-    else if(pathname === '/create'){
+      }
+    } else if(pathname === '/create'){
       fs.readdir('./data', function(error, filelist){
         var title = 'WEB - create';
         var list = template.list(filelist);
