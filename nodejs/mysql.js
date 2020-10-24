@@ -16,3 +16,5 @@ connection.query('SELECT * FROM topic', function (error, results, fields) {
 });
  
 connection.end();
+
+/* just note */
